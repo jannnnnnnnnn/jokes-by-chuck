@@ -8,13 +8,19 @@ import SigninForm from "../../components/loginform";
 class App extends React.Component {
   state = {
     username: "",
-    jokes: [],
-    // jokes: null,
-    // icon_url: null,
-    // created_at: null,
+    // jokes: [],
+    joke: {
+      value: null,
+      icon_url: null,
+      created_at: null,
+    },
   };
 
   async componentDidMount() {
+    this.fetchJoke();
+  }
+
+  fetchJoke = async () => {
     const data = await getContent();
     console.log(data);
     const joke = {
@@ -23,26 +29,13 @@ class App extends React.Component {
       created_at: data.created_at,
     };
     this.setState({
-      jokes: [...this.state.jokes, joke],
+      joke,
     });
-    // this.setState({
-    //   jokes: data.value,
-    //   icon_url: data.icon_url,
-    //   created_at: data.created_at,
-    // });
-  }
+  };
 
   handleinputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
-  // handleAdd = () =>
-  //   this.setState((prevState) => ({
-  //     items: users.slice(0, prevState.items.length + 1),
-  //   }));
-
-  // handleRemove = () =>
-  //   this.setState((prevState) => ({ items: prevState.items.slice(0, -1) }));
 
   render() {
     return (
@@ -62,7 +55,9 @@ class App extends React.Component {
           <Route
             exact
             path="/jokes"
-            render={() => <Content {...this.state} />}
+            render={() => (
+              <Content {...this.state} fetchJoke={this.fetchJoke} />
+            )}
           />
         </Switch>
       </div>

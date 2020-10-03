@@ -7,8 +7,6 @@ import { Button, Form } from "semantic-ui-react";
 function SigninForm(props) {
   return (
     <div>
-      {/* <Form>
-        <Form.Field> */}
       <label htmlFor="username">Enter Your Name: </label>
       <input
         type="text"
@@ -17,17 +15,9 @@ function SigninForm(props) {
         value={props.username}
         onChange={props.handleinputChange}
       ></input>
-      {/* </Form.Field> */}
-      <Button
-        as={Link}
-        to="/jokes"
-        type="submit"
-        // onSubmit ={props.displayMainPage}
-        // onClick={props.displayMainPage}
-      >
+      <Button as={Link} to="/jokes" type="submit">
         Submit
       </Button>
-      {/* </Form> */}
     </div>
   );
 }
